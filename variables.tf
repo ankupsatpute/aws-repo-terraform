@@ -1,11 +1,11 @@
 variable "aws_region" {
   description = "The AWS region to create things in."
-  default     = "us-east-2"
+  default     = "ap-south-1"
 }
 
 variable "key_name" {
   description = " SSH keys to connect to ec2 instance"
-  default     =  "terra"
+  default     =  "LTIDEMO"
 }
 
 variable "instance_type" {
@@ -15,7 +15,7 @@ variable "instance_type" {
 
 variable "security_group" {
   description = "Name of security group"
-  default     = "my-jenkins-security-group"
+  default     = "my-terraform-security-group"
 }
 
 variable "tag_name" {
@@ -25,5 +25,5 @@ variable "tag_name" {
 
 variable "ami_id" {
   description = "AMI for Ubuntu Ec2 instance"
-  default     = "ami-002068ed284fb165b"
+  default     = "ami-06984ea821ac0a879"
 }
