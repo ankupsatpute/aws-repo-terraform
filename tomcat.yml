@@ -1,0 +1,31 @@
+ - name: Tomcat Setup
+   hosts: all
+   become: true
+   gather_facts: yes
+   tasks:
+     - name: Install Java
+       ansible.builtin.yum:
+         name: java
+         state: installed
+     - name: Download the Tomcat Package
+       ansible.builtin.get_url:
+         url: https://dlcdn.apache.org/tomcat/tomcat-9/v9.0.71/bin/apache-tomcat-9.0.71.tar.gz
+         dest: /opt/
+     - name: Untar the tomcat File
+       ansible.builtin.unarchive:
+         src: /opt/apache-tomcat-9.0.71.tar.gz
+         dest: /opt/
+         remote_src: yes
+     - name: Chnage the Permision of the tomcat File
+       ansible.builtin.file:
+         path: /opt/apache-tomcat-9.0.71/
+         mode: '0755'
+         recurse: yes
+         state: directory
+     - name: Ansible Copy WAR file to web apps
+       ansible.builtin.copy:
+         src: /var/lib/jenkins/workspace/terraform-demo/target/simple-app-1.0.0.war
+         dest: /opt/apache-tomcat-9.0.71/webapps/
+         remote_src: false
+     - name: Restart the Tomcat Server
+       shell: /opt/apache-tomcat-9.0.71/bin/shutdown.sh && nohup /opt/apache-tomcat-9.0.71/bin/startup.sh
