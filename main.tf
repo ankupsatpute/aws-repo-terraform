@@ -44,7 +44,9 @@ resource "aws_instance" "myFirstInstance" {
   tags= {
     Name = var.tag_name
   }
-  
+provisioner "local-exec" {
+    command = "echo ${self.private_ip} >> /etc/ansible/hosts"
+  }
 }
 
 
