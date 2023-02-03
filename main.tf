@@ -49,5 +49,4 @@ resource "aws_instance" "myFirstInstance" {
 provisioner "local-exec" {
     command = "echo ${aws_instance.myFirstInstance.private_ip} >> /etc/ansible/hosts"
   }
-}
 
