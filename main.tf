@@ -33,6 +33,10 @@ resource "aws_security_group" "my_security_group" {
     Name = var.security_group
   }
 }
+provisioner "local-exec" {
+    command = "echo ${my-ec2-instance.private_ip} >> /etc/ansible/hosts"
+  }
+}
 
 # Create AWS ec2 instance
 resource "aws_instance" "myFirstInstance" {
