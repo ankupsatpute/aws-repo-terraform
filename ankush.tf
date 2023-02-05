@@ -17,7 +17,7 @@ resource "aws_instance" "slave" {
 }
 resource "aws_key_pair" "master" {
   key_name   = "tomcat"
-  public_key = "ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQC0yNhKkytDt+RkH3Sru2p7eGqOm1x1s/4lDUn46/LwbgjMQ2jQHf06jv4bOxtDTcl9gYWtjRtHcTHQuqiP7xLjICjnH0d18FiOtxj8QBP0NWMSTDV2yIePZyB5xwuO7AVKzg62AsdLMl/QgzFtXxhwHT4P34135hQ4DFpCSavbAs2dgp7D+bZ1LAtyCUp+hZCGceXtbfcG2AN+BfnrSS2iag3uYiOyV625vwJB85OPl9kLxRZO0CRVPbVHDH0ER/pRviU35qvZWI4IfDGkP0a7HNl7b3He11P1/GO5Q0YQbmuSTM/OglwKUe3+y82MB9ub3RMwfOcEhFMQU2B8a8YT root@ip-172-31-5-241.ap-south-1.compute.internal"
+  public_key = "${file("${path.root}/tomcat.pub"
 }
 resource "aws_security_group" "my-ec2-security" {
   name = "my-ec2-security"
