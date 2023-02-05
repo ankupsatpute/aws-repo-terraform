@@ -12,12 +12,12 @@ resource "aws_instance" "slave" {
   }
 
   provisioner "local-exec" {
-    command = "echo ${aws_instance.slave.private_ip} >> ankush.ini"
+    command = "echo ${aws_instance.slave.private_ip} > ankush.ini"
   }
 }
 resource "aws_key_pair" "master" {
   key_name   = "tomcat-1"
-  public_key = file("${path.root}/tomcat.pub")
+  public_key = file("/home/ec2-user/.ssh/id_rsa.pub")
 }
 resource "aws_security_group" "my-ec2-security" {
   name = "my-ec2-security"
