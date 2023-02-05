@@ -12,7 +12,7 @@ resource "aws_instance" "slave" {
   }
 
   provisioner "local-exec" {
-    command = "echo ${aws_instance.slave.private_ip} >> ankush.ini"
+    command = "echo ${aws_instance.slave.private_ip} > ankush.ini"
   }
 }
 resource "aws_key_pair" "master" {
