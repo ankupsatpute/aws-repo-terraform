@@ -1,0 +1,5 @@
+---
+ - hosts: all
+   tasks:
+     - name: Execute the file 
+       shell: "echo 'Hello Ankush' > /tmp/ankush"
