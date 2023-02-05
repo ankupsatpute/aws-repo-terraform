@@ -16,7 +16,7 @@ resource "aws_instance" "slave" {
   }
 }
 resource "aws_key_pair" "master" {
-  key_name   = "tomcat"
+  key_name   = "tomcat-1"
   public_key = file("${path.root}/tomcat.pub")
 }
 resource "aws_security_group" "my-ec2-security" {
