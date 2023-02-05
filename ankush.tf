@@ -4,7 +4,7 @@ provider "aws" {
 resource "aws_instance" "slave" {
   ami                    = "ami-01a4f99c4ac11b03c"
   instance_type          = "t2.micro"
-  key_name               = "tomcat"
+  key_name               = "LTIDEMO"
   availability_zone      = "ap-south-1a"
   vpc_security_group_ids = [aws_security_group.my-ec2-security.id]
   tags = {
@@ -15,10 +15,7 @@ resource "aws_instance" "slave" {
     command = "echo ${aws_instance.slave.private_ip} > ankush.ini"
   }
 }
-resource "aws_key_pair" "master" {
-  key_name   = "tomcat-1"
-  public_key = file("./tomcat.pub")
-}
+
 resource "aws_security_group" "my-ec2-security" {
   name = "my-ec2-security"
 
