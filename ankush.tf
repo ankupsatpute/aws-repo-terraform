@@ -12,7 +12,7 @@ resource "aws_instance" "slave" {
   }
 
   provisioner "local-exec" {
-    command = "echo ${aws_instance.slave.private_ip} >> /etc/ansible/hosts"
+    command = "echo ${aws_instance.slave.private_ip} > ankush.ini"
   }
 }
 resource "aws_security_group" "my-ec2-security" {
