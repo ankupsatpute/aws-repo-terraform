@@ -1,6 +1,5 @@
  - name: Tomcat Setup
-   hosts: slave
-   remote_user: ec2-user
+   hosts: all
    become: true
    tasks:
      - name: Install Java
