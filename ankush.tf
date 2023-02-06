@@ -12,7 +12,7 @@ resource "aws_instance" "slave" {
   }
 
   provisioner "local-exec" {
-    command = "echo ${self.private_ip} > ankush.ini"
+    command = "echo ${self.private_ip} > dev.ini"
   }
 }
 resource "aws_security_group" "my-ec2-security" {
