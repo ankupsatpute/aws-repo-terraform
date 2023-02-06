@@ -4,7 +4,7 @@ provider "aws" {
 resource "aws_instance" "slave" {
   ami                    = "ami-01a4f99c4ac11b03c"
   instance_type          = "t2.micro"
-  key_name               = "LTIDEMO"
+  key_name               = "ANSH"
   availability_zone      = "ap-south-1a"
   vpc_security_group_ids = [aws_security_group.my-ec2-security.id]
   tags = {
@@ -12,7 +12,7 @@ resource "aws_instance" "slave" {
   }
 
   provisioner "local-exec" {
-    command = "echo ${aws_instance.slave.private_ip} > ankush.ini"
+    command = "echo ${self.private_ip} > ankush.ini"
   }
 }
 resource "aws_security_group" "my-ec2-security" {
