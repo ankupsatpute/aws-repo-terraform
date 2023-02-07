@@ -1,4 +1,4 @@
 ---
 # handlers file for Ankush
 - name: restart the tomcat server
-  shell: /opt/{{ tomcat_service_name }}-{{ tomcat_version }}/bin/shutdown.sh && nohup /opt/{{ tomcat_service_name }}-{{ tomcat_version }}/bin/startup.sh
+  shell: /opt/apache-tomcat-9.0.71/bin/shutdown.sh && nohup /opt/apache-tomcat-9.0.71/bin/startup.sh
