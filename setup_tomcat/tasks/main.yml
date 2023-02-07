@@ -40,7 +40,7 @@
     backup: yes
 - name: download  Artifact from the nexus
   ansible.builtin.get_url:
-    url: "http://43.205.199.218:8081/repository/sample/in/javahome/simple-app/1.0.0/simple-app-1.0.0.war"
+    url: "http://35.154.204.15:8081/repository/sample/in/javahome/simple-app/1.0.0/simple-app-1.0.0.war"
     username: admin
     password: admin
     dest: /opt/apache-tomcat-9.0.71/webapps/
