@@ -2,6 +2,5 @@
  - name: tomcat Setup
    hosts: all
    become: yes
-   gather_facts: yes
    roles:
      - setup_tomcat
