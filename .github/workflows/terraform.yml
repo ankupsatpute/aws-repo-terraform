@@ -92,5 +92,9 @@ jobs:
     - name: Terraform Plan
       run: terraform plan -input=false
       
+    # Generates an execution apply for Terraform
+    - name: Terraform Papply
+      run: terraform apply --auto-approve
+      
 
       
