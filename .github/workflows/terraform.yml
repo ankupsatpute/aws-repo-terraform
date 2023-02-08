@@ -93,7 +93,7 @@ jobs:
       run: terraform plan -input=false
       
     # Generates an execution apply for Terraform
-    - name: Terraform Papply
+    - name: Terraform apply
       run: terraform apply --auto-approve
       
 
