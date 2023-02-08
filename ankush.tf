@@ -8,6 +8,7 @@ resource "aws_instance" "slave" {
   availability_zone      = "ap-south-1a"
   vpc_security_group_ids = [aws_security_group.my-ec2-security.id]
   tags = {
+    Environment = "dev"
     Name = "my-ec2-instance"
   }
 
