@@ -68,7 +68,17 @@ jobs:
     # Checkout the repository to the GitHub Actions runner
     - name: Checkout
       uses: actions/checkout@v3
-
+      
+    # Set Up The Java 
+    - name: Setup JDK 1.8
+      uses: actions/checkout@v3
+      with:
+        java-version: 1.8
+        
+    # GitHub Action Build Maven Project 
+    - name: GitHub Action Build Maven Project 
+      run: mvn -B package --file pom.xml 
+Comment: >
     # Install the latest version of Terraform CLI and configure the Terraform CLI configuration file with a Terraform Cloud user API token
     - name: Setup Terraform
       uses: hashicorp/setup-terraform@v1
