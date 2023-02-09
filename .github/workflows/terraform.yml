@@ -81,9 +81,10 @@ jobs:
       
     # GitHub Action for Sonar Qube Scan Project 
     - name: SonarQube Scan
-      uses: sonarsource/sonarqube-scan-action@master
-      with:
+     # uses: sonarsource/sonarqube-scan-action@master
+      env:
         SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
         SONAR_HOST_URL: ${{ secrets.SONAR_HOST_URL }}
-        
+      run: mvn -B verify org.sonarsource.scanner.maven:sonar-maven-plugin:sonar
+         
    
