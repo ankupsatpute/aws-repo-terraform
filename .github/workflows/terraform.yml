@@ -81,7 +81,7 @@ jobs:
       
     # GitHub Action for Sonar Qube Scan Project 
     - name: SonarQube Scan
-      uses: kitabisa/sonarqube-action@master
+      uses: sonarsource/sonarqube-action@master
       with:
         host: ${{ secrets.SONARQUBE_HOST }}
         login: ${{ secrets.SONARQUBE_TOKEN }}
