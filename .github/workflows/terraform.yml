@@ -77,4 +77,13 @@ jobs:
   
     # GitHub Action Build Maven Project 
     - name: GitHub Action Build Maven Project 
-      run: mvn -B package --file pom.xml 
+      run: mvn -B package --file pom.xml
+      
+    # GitHub Action for Sonar Qube Scan Project 
+    - name: SonarQube Scan
+      uses: kitabisa/sonarqube-action@master
+      with:
+        host: ${{ secrets.SONARQUBE_HOST }}
+        login: ${{ secrets.SONARQUBE_TOKEN }}
+        projectKey: "Ansible"
+   
