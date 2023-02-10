@@ -8,6 +8,8 @@ on:
 env:
   access_key: ${{secrets.AWS_ACCESS_KEY}}
   secret_key: ${{secrets.AWS_SECRET_KEY}}
+  ECS_SERVICE: aws-repo-terraform1             
+  ECS_CLUSTER: aws-repo-terraform1 
 
 jobs:
   Checkout:
@@ -60,5 +62,13 @@ jobs:
         docker build -t $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG .
         docker push $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG
         echo "::set-output name=image::$ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG"
+      
+    - name: Deploy Amazon ECS task definition
+      uses: aws-actions/amazon-ecs-deploy-task-definition@v1
+      with:
+        #task-definition: ${{ steps.task-def.outputs.task-definition }}
+        service: ${{ env.ECS_SERVICE }}
+        cluster: ${{ env.ECS_CLUSTER }}
+        wait-for-service-stability: true
      
       
