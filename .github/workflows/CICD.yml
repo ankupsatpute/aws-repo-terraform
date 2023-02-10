@@ -33,9 +33,7 @@ jobs:
 
   BUILD:
     needs: [ Checkout ]
-    runs-on: ubuntu-latest
-    environment: production
-      
+    runs-on: ubuntu-latest        
     # Set Up The Java 
     steps:
     - name: Checkout
@@ -45,10 +43,7 @@ jobs:
       
   SONAR:
     needs: [ BUILD ]
-    runs-on: ubuntu-latest
-    environment: production
-      
-     
+    runs-on: ubuntu-latest     
     steps:
     - name: Checkout
       uses: actions/checkout@v3
@@ -57,4 +52,33 @@ jobs:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
       run: mvn -B package org.sonarsource.scanner.maven:sonar-maven-plugin:sonar -Dsonar.projectKey=ankupsatpute_aws-repo-terraform
+      
+  Artifact:
+    needs: [ SONAR ]
+    runs-on: ubuntu-latest    
+    steps:
+    - name: Checkout
+      uses: actions/checkout@v3
+    - name: Artifact upload
+      uses: actions/upload-artifact@v3
+      with:
+        name: Simple-App
+        path: /home/runner/work/aws-repo-terraform/aws-repo-terraform/target/simple-app-2.0.0.war
+        
+  Docker:
+    needs: [ Artifact ]
+    runs-on: ubuntu-latest   
+    steps:
+    - name: Checkout
+      uses: actions/checkout@v3
+    - name: Build & push Docker image
+      uses: mr-smithers-excellent/docker-build-push@v5
+      with:
+        image: ankushsatpute/githubaction
+        tags: latest
+        registry: docker.io
+        dockerfile: Dockerfile
+        username: ${{ secrets.DOCKER_USERNAME }}
+        password: ${{ secrets.DOCKER_PASSWORD }}
+    
      
