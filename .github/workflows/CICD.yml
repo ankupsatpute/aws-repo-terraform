@@ -38,6 +38,8 @@ jobs:
       
     # Set Up The Java 
     steps:
+    - name: Checkout
+      uses: actions/checkout@v3
     - name: Build Code
       run: mvn -B package --file pom.xml
      
