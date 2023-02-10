@@ -42,7 +42,7 @@
 #       with:
 #         cli_config_credentials_token: ${{ secrets.TF_API_TOKEN }}
 
-name: 'Terraform'
+name: 'CICD'
 
 on:
   push:
@@ -99,7 +99,7 @@ jobs:
     - name: Artifact upload
       uses: actions/upload-artifact@v3
       with:
-       name: my-artifact
+       name: Simple-App
        path: /home/runner/work/aws-repo-terraform/aws-repo-terraform/target/simple-app-2.0.0.war
 
          
