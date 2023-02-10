@@ -48,14 +48,11 @@ jobs:
        path: /home/runner/work/aws-repo-terraform/aws-repo-terraform/target/simple-app-2.0.0.war
      
     - name: Build & push Docker image
-      uses: mr-smithers-excellent/docker-build-push@v5
-      with:
-        image: ankushsatpute/GITHUBACTION
-        tags: latest
-        registry: docker.io
-        dockerfile: Dockerfile
-        username: ${{ secrets.DOCKER_USERNAME }}
-        password: ${{ secrets.DOCKER_PASSWORD }}
-
-         
-   
+      uses: mr-smithers-excellent/docker-build-push@v5
+      with:
+        image: ankushsatpute/githubaction
+        tags: latest
+        registry: docker.io
+        dockerfile: Dockerfile
+        username: ${{ secrets.DOCKER_USERNAME }}
+        password: ${{ secrets.DOCKER_PASSWORD }}
