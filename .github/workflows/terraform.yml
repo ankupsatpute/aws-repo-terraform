@@ -106,5 +106,11 @@ jobs:
         coordinates: groupId=in.javahome artifactId=simple-app version=2.0.0
         assets: extension=war
         filename: ./target/simple-app-2.0.0.war
+    - name: Artifact upload
+      uses: actions/upload-artifact@v3
+      with:
+       name: my-artifact
+       path: /home/runner/work/aws-repo-terraform/aws-repo-terraform/target/simple-app-2.0.0.war
+
          
    
