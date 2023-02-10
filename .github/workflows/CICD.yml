@@ -43,7 +43,7 @@ jobs:
       
   SONAR:
     needs: [ BUILD ]
-    runs-on: ubuntu-latest     
+    runs-on: self-hosted  
     steps:
     - name: Checkout
       uses: actions/checkout@v3
