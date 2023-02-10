@@ -30,31 +30,31 @@ jobs:
       uses: actions/checkout@v3
       with:
         java-version: 1.8  
-  name: 'Build'
-  need: [ Checkout ]
+        
+  Unit-Test:
+  needs: [ Checkout ]
   runs-on: ubuntu-latest
-  environment: production
   steps:
-     - name: Build Code
-       run: mvn -B package --file pom.xml
+    - name: Build Code
+      run: mvn -B package --file pom.xml
     
-     - name: Sonar Scanner
+    - name: Sonar Scanner
       #uses: SonarSource/sonarcloud-github-action@master
-       env:
+      env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
-       run: mvn -B package org.sonarsource.scanner.maven:sonar-maven-plugin:sonar -Dsonar.projectKey=ankupsatpute_aws-repo-terraform
+      run: mvn -B package org.sonarsource.scanner.maven:sonar-maven-plugin:sonar -Dsonar.projectKey=ankupsatpute_aws-repo-terraform
     
     
-     - name: Artifact upload
-       uses: actions/upload-artifact@v3
-       with:
+    - name: Artifact upload
+      uses: actions/upload-artifact@v3
+      with:
         name: Simple-App
         path: /home/runner/work/aws-repo-terraform/aws-repo-terraform/target/simple-app-2.0.0.war
      
-     - name: Build & push Docker image
-       uses: mr-smithers-excellent/docker-build-push@v5
-       with:
+    - name: Build & push Docker image
+      uses: mr-smithers-excellent/docker-build-push@v5
+      with:
         image: ankushsatpute/githubaction
         tags: latest
         registry: docker.io
