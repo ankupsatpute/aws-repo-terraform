@@ -42,4 +42,17 @@ jobs:
       uses: actions/checkout@v3
     - name: Build Code
       run: mvn -B package --file pom.xml
+      
+  SONAR:
+    needs: [ BUILD ]
+    runs-on: ubuntu-latest
+    environment: production
+      
+     
+    steps:
+    - name: Sonar Scanner
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
+      run: mvn -B package org.sonarsource.scanner.maven:sonar-maven-plugin:sonar -Dsonar.projectKey=ankupsatpute_aws-repo-terraform
      
