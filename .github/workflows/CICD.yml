@@ -50,6 +50,8 @@ jobs:
       
      
     steps:
+    - name: Checkout
+      uses: actions/checkout@v3
     - name: Sonar Scanner
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
