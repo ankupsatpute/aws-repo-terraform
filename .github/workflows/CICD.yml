@@ -31,62 +31,13 @@ jobs:
       with:
         java-version: 1.8  
 
-  BUILD:
-    needs: [ Checkout ]
-    runs-on: ubuntu-latest        
-    # Set Up The Java 
-    steps:
-    - name: Checkout
-      uses: actions/checkout@v3
+
     - name: Build Code
       run: mvn -B package --file pom.xml
       
-  SONAR:
-    needs: [ BUILD ]
-    runs-on: ubuntu-latest 
-    steps:
-    - name: Checkout
-      uses: actions/checkout@v3
-    - name: Sonar Scanner
-      env:
-        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
-      run: mvn -B package org.sonarsource.scanner.maven:sonar-maven-plugin:sonar -Dsonar.projectKey=ankupsatpute_aws-repo-terraform
-      
-  Artifact:
-    needs: [ SONAR ]
-    runs-on: ubuntu-latest    
-    steps:
-    - name: Checkout
-      uses: actions/checkout@v3
-    - name: Artifact upload
-      uses: actions/upload-artifact@v3
+  
+    - name: Install Kubectl
+      uses: azure/setup-kubectl@v3
       with:
-        name: Simple-App
-        path: /home/runner/work/aws-repo-terraform/aws-repo-terraform/target/simple-app-2.0.0.war
-        
-  Docker:
-    needs: [ Artifact ]
-    runs-on: ubuntu-latest   
-    steps:
-    - name: Checkout
-      uses: actions/checkout@v3
-    - name: Build Code
-      run: mvn -B package --file pom.xml
-    - name: Login to Docker Hub
-      uses: docker/login-action@v2
-      with:
-        username: ${{ secrets.DOCKER_USERNAME }}
-        password: ${{ secrets.DOCKER_PASSWORD }}
-    - name: Set up Docker Buildx
-      uses: docker/setup-buildx-action@v2
-    - name: Build and push
-      uses: docker/build-push-action@v4
-      with: 
-        context: .
-        file: ./Dockerfile
-        push: true
-        tags: ${{ secrets.DOCKER_USERNAME }}/githubdemo:latest
-        
-    
-     
+       version: 'v1.24.0' # default is latest stable
+       id: install
