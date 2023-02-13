@@ -8,7 +8,7 @@ on:
 env:
   access_key: ${{secrets.AWS_ACCESS_KEY}}
   secret_key: ${{secrets.AWS_SECRET_KEY}}
-  AWS_REGION: ap-south-1                  # set this to your preferred AWS region, e.g. us-west-1
+  AWS_REGION: ap-south-1                  # set this to your preferred AWS region, e.g. ap-south-1
   ECR_REPOSITORY: demo-deploy          # set this to your Amazon ECR repository name
   ECS_SERVICE: demo-deploy              # set this to your Amazon ECS service name
   ECS_CLUSTER: demo-deploy              # set this to your Amazon ECS cluster name
@@ -17,8 +17,8 @@ env:
                                                # containerDefinitions section of your task definition
 
 jobs:
-  Checkout:
-    name: 'Checkout'
+  CICD:
+    name: 'CICD'
     runs-on: ubuntu-latest
     environment: production
 
@@ -42,6 +42,11 @@ jobs:
     - name: Build Code
       run: mvn -B package --file pom.xml
     
+    - name: Sonar Scanner
+      env:
+       GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+       SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
+      run: mvn -B package org.sonarsource.scanner.maven:sonar-maven-plugin:sonar -Dsonar.projectKey=ankupsatpute_aws-repo-terraform
         
     - name: Configure AWS Credentials
       uses: aws-actions/configure-aws-credentials@v1
